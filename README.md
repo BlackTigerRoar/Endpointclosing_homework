@@ -1,6 +1,6 @@
-![](Architecture.png)
-# Endpointclosing_homework
 # Candidate Name: Shen-Yu Sun 
+![](Architecture.png)
+[![Watch the video](Wiki.png)](https://youtu.be/PY4B7HukhqY)
 ## Wikipedia - Android client automation - iOS compatible 
 This is a comprehensive Automation Framework that I built it from the gorund up.
 It is very scalable, followed DRY principle, and ready to expand! It can supports one phone, or multiple phones at the same time. 
