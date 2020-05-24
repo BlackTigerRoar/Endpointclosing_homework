@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+    <listeners>
+        <listener class-name="listeners.TestListener" />
+    </listeners>
+    <test name="Test">
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="10" />
+        <parameter name="deviceName" value="Test Device" />
+        <classes>
+            <class name="tests.WikiAppTests" />
+        </classes>
+    </test>
+</suite>
+
+<!-- ********** Easy scale this test with different device or OS. Example *************
+    <test name="Test2">
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="9" />
+        <parameter name="deviceName" value="Test Device2" />
+        <classes>
+            <class nawikiwikioWikiCoreTest" />
+        </classes>
+    </test>
+
+    <test name="IOS_Test">
+        <parameter name="platformName" value="iOS" />
+        <parameter name="platformVersion" value="13" />
+        <parameter name="deviceName" value="iOS Test Device" />
+        <classes>
+            <class nawikiwikioWikiCoreTest" />
+        </classes>
+    </test>
+
+-->

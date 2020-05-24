@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="42243" started-at="2020-05-23T23:24:28 PDT" finished-at="2020-05-23T23:25:11 PDT">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="42243" started-at="2020-05-23T23:24:28 PDT" finished-at="2020-05-23T23:25:11 PDT">
+      <class name="tests.WikiAppTests">
+        <test-method status="PASS" signature="driverSetup(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="driverSetup" is-config="true" duration-ms="14369" started-at="2020-05-23T23:24:28 PDT" finished-at="2020-05-23T23:24:43 PDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Android]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[10]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Test Device]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- driverSetup -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="beforeMethod" is-config="true" duration-ms="370" started-at="2020-05-23T23:24:43 PDT" finished-at="2020-05-23T23:24:43 PDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.WikiAppTests.t1_saveTwoArticlesIntoOneList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="t1_saveTwoArticlesIntoOneList()[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="t1_saveTwoArticlesIntoOneList" duration-ms="21790" started-at="2020-05-23T23:24:43 PDT" finished-at="2020-05-23T23:25:05 PDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- t1_saveTwoArticlesIntoOneList -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2020-05-23T23:25:05 PDT" finished-at="2020-05-23T23:25:05 PDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.WikiAppTests.t2_articleInTheListMatchTheActualArticle()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="t2_articleInTheListMatchTheActualArticle()[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="t2_articleInTheListMatchTheActualArticle" duration-ms="2577" started-at="2020-05-23T23:25:05 PDT" finished-at="2020-05-23T23:25:07 PDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- t2_articleInTheListMatchTheActualArticle -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2020-05-23T23:25:08 PDT" finished-at="2020-05-23T23:25:08 PDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void tests.WikiAppTests.t3_verifyTheScreenCanBeRotated()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="t3_verifyTheScreenCanBeRotated()[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="t3_verifyTheScreenCanBeRotated" duration-ms="2615" started-at="2020-05-23T23:25:08 PDT" finished-at="2020-05-23T23:25:10 PDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- t3_verifyTheScreenCanBeRotated -->
+        <test-method status="PASS" signature="destroy()[pri:0, instance:tests.WikiAppTests@5a4041cc]" name="destroy" is-config="true" duration-ms="463" started-at="2020-05-23T23:25:10 PDT" finished-at="2020-05-23T23:25:11 PDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- destroy -->
+      </class> <!-- tests.WikiAppTests -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
