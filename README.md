@@ -1,3 +1,4 @@
+![](Architecture.png)
 # Endpointclosing_homework
 # Candidate Name: Shen-Yu Sun 
 ## Wikipedia - Android client automation - iOS compatible 
@@ -26,3 +27,5 @@ Packages/Classes:
 - You should run appium-doctor to make sure your environment is Appium ready!  https://github.com/appium/appium-doctor
 - Make sure device is connected to usb, and USB debug mode is turn on. Run adb command "adb devices" from your android home to make sure.
 - If environemnt setup correctly, then you should be able to kick off test by right-click "endpoint_testing.xml" and Run it within your IDE.
+# Last but not least... the ugly TestNG report. Let's replace this one for production version shall we?
+![](Ugly_basic_testng_report.png)
