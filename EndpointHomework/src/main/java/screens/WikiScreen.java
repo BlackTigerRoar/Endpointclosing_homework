@@ -2,6 +2,7 @@ package screens;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import screens.articles.ArticleScreen;
 import screens.mylists.MyListsScreen;
 import wikiwiki.WikiCore;
@@ -19,6 +20,7 @@ public class WikiScreen extends WikiCore {
     private List<MobileElement> news;
 
     @AndroidFindBy (accessibility = "My lists")
+
     private MobileElement myListsIcon;
 
     /*

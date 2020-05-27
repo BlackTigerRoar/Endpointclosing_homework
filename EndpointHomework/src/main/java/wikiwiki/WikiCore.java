@@ -3,7 +3,10 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +18,12 @@ import org.testng.annotations.Parameters;
 import testhelper.TestHelper;
 import java.net.URL;
 import java.util.Properties;
+
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
 
 /**
  * WikiCore is the core of this automation framework.
@@ -52,19 +61,32 @@ public class WikiCore {
             String configFileName = "configuration.properties";
             configuration.load(getClass().getClassLoader().getResourceAsStream(configFileName));
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            // Getting platformName, platformVersion and deviceName from TestNG file.
             desiredCapabilities.setCapability("platformName", platformName);
             desiredCapabilities.setCapability("platformVersion", platformVersion);
             desiredCapabilities.setCapability("deviceName", deviceName);
-            desiredCapabilities.setCapability("automationName", configuration.getProperty("androidUiAutomator2"));
-            desiredCapabilities.setCapability("appPackage", configuration.getProperty("androidWikipediaPackage"));
-            desiredCapabilities.setCapability("appActivity", configuration.getProperty("androidAppActivity"));
-            desiredCapabilities.setCapability("noReset", "true");
-            URL url = new URL(configuration.getProperty("appiumServerUrl"));
 
-            driver = new AndroidDriver(url, desiredCapabilities);
-            // sessiondId is for parallel testing purpose //
-            String sessionId = driver.getSessionId().toString();
+            if (platformName.equals("Android")) {
+                desiredCapabilities.setCapability("automationName", configuration.getProperty("androidUiAutomator2"));
+                desiredCapabilities.setCapability("appPackage", configuration.getProperty("androidWikipediaPackage"));
+                desiredCapabilities.setCapability("appActivity", configuration.getProperty("androidAppActivity"));
+                desiredCapabilities.setCapability("noReset", "true");
+                URL url = new URL(configuration.getProperty("appiumServerUrl"));
 
+                driver = new AndroidDriver(url, desiredCapabilities);
+            } else if (platformName.equals("iOS")) {
+                desiredCapabilities.setCapability("automationName", configuration.getProperty("iOSTestFramework"));
+                desiredCapabilities.setCapability("app", getClass().getResource(configuration.getProperty("iOSWikiAppPath")).getFile());
+                desiredCapabilities.setCapability("bundleId", configuration.getProperty("iOSWikiBuildingId"));
+                desiredCapabilities.setCapability("noReset", "true");
+                URL iosUrl = new URL(configuration.getProperty("appiumServerUrl"));
+
+                driver = new IOSDriver(iosUrl, desiredCapabilities);
+
+
+            } else {
+                throw new Exception("Platform is not correct in the TestNG file: endpoint_testing.xml");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -116,10 +138,11 @@ public class WikiCore {
      */
     protected void swipeLeft(MobileElement item) {
         waitForThingsToShowUp(item);
+
         new TouchAction(driver)
-                .press(item)
-                .waitAction(300)
-                .moveTo(500, 0)
+                .press(element(item))
+                .waitAction(waitOptions(ofMillis(300)))
+                .moveTo(element(item,500,0))
                 .release()
                 .perform();
     }

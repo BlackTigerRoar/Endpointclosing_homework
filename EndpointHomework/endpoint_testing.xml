@@ -7,6 +7,7 @@
         <parameter name="platformName" value="Android" />
         <parameter name="platformVersion" value="10" />
         <parameter name="deviceName" value="Test Device" />
+
         <classes>
             <class name="tests.WikiAppTests" />
         </classes>
@@ -31,5 +32,10 @@
             <class nawikiwikioWikiCoreTest" />
         </classes>
     </test>
-
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="10" />
+        <parameter name="deviceName" value="Test Device" />
+                <parameter name="platformName" value="iOS" />
+        <parameter name="platformVersion" value="12.1" />
+        <parameter name="deviceName" value="iPhone 8" />
 -->
