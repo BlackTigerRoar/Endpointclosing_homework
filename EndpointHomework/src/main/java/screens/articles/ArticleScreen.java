@@ -22,7 +22,7 @@ public class ArticleScreen extends WikiCore {
     */
     public String getArticleTitle(int whichOne) {
         MobileElement article = articles.get(whichOne);
-        return getScreenAttribute(article, "text");
+        return getElementText(article);
     }
 
     public ArticleDetailScreen touchArticle(int whichOne) {
@@ -36,10 +36,3 @@ public class ArticleScreen extends WikiCore {
         return new WikiScreen();
     }
 }
-
-
-
-
-    // page object model works inner loop. If we are at some page, and if the action taking us to other page
-    // we need to return the object of that particular page, so we don't need to inti the particular page
-    // If we are not going to any other screen, then we return the object of the same class.

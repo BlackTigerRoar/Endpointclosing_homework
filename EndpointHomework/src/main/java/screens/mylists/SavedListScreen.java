@@ -2,6 +2,7 @@ package screens.mylists;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import screens.articles.ArticleDetailScreen;
 
 import java.util.ArrayList;
@@ -16,7 +17,11 @@ public class SavedListScreen extends MyListsScreen {
         MobileElement Objects
      */
     @AndroidFindBy (id = "page_list_item_title")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeCell\" AND visible == 1")
     private List<MobileElement> listTitles;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "type == \"XCUIElementTypeLink\" AND visible == 1")
+    private List<MobileElement> iOSlistTitles;
 
     @AndroidFindBy (id = "item_reading_list_statistical_description")
     private MobileElement availableArticleCounts;
@@ -25,11 +30,31 @@ public class SavedListScreen extends MyListsScreen {
         Screen Actions
      */
     public void deleteTheList(int whichOne) {
-        swipeLeft(listTitles.get(whichOne));
+        swipeElementToLeft(listTitles.get(whichOne));
+    }
+
+    public void iOsDeleteTheList(int whichOne) {
+        MobileElement targetArticle = listTitles.get(whichOne);
+        swipeElementToLeft(targetArticle);
+        iOsTouchSwipeRightItem(targetArticle);
+    }
+
+    public int getArticlesSize() {
+        return listTitles.size();
     }
 
     public String getSaveArticleTitle(int whichOne) {
-        return getScreenAttribute(listTitles.get(whichOne), "text");
+        return getElementText(listTitles.get(whichOne));
+    }
+
+    public String getIosSaveArticleTitle(int whichOne) {
+        return getElementText(iOSlistTitles.get(whichOne));
+    }
+
+    public ArticleDetailScreen touchIosTargetArticle(int whichOne) {
+        MobileElement article = iOSlistTitles.get(whichOne);
+        touch(article);
+        return new ArticleDetailScreen();
     }
 
     /*
@@ -39,7 +64,7 @@ public class SavedListScreen extends MyListsScreen {
      */
     public List<Integer> getAvailableArticlesCount() {
         List<Integer> availableArticlesCount = new ArrayList<Integer>();
-        String[] available = getScreenAttribute(availableArticleCounts, "text").split(" ");
+        String[] available = getElementText(availableArticleCounts).split(" ");
         availableArticlesCount.add(Integer.parseInt(available[0]));
         availableArticlesCount.add(Integer.parseInt(available[2]));
         return availableArticlesCount;

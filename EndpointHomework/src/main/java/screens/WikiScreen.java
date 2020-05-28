@@ -5,6 +5,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import screens.articles.ArticleScreen;
 import screens.mylists.MyListsScreen;
+import screens.search.SearchWikipediaScreen;
 import wikiwiki.WikiCore;
 
 import java.util.List;
@@ -20,8 +21,11 @@ public class WikiScreen extends WikiCore {
     private List<MobileElement> news;
 
     @AndroidFindBy (accessibility = "My lists")
-
+    @iOSXCUITFindBy (id = "Saved")
     private MobileElement myListsIcon;
+
+    @iOSXCUITFindBy (id = "Search Wikipedia")
+    private MobileElement searchWikipediaEditBox;
 
     /*
         Screen Actions
@@ -34,5 +38,10 @@ public class WikiScreen extends WikiCore {
     public MyListsScreen touchMyLists() {
         touch(myListsIcon);
         return new MyListsScreen();
+    }
+
+    public SearchWikipediaScreen touchSearchWikipediaEditBox() {
+        touch(searchWikipediaEditBox);
+        return new SearchWikipediaScreen();
     }
 }

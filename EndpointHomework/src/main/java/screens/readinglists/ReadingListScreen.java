@@ -11,7 +11,8 @@ public class ReadingListScreen extends WikiCore {
     /*
         MobileElement Objects
     */
-    @AndroidFindBy (id = "item_title") private MobileElement savedText;
+    @AndroidFindBy (id = "item_title")
+    private MobileElement savedText;
 
     /*
         Screen Actions

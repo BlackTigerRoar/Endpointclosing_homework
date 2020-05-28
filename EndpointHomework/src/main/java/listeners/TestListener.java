@@ -29,22 +29,22 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestStart(ITestResult iTestResult) {
-
+        // Out of scope for this assignment, but it's part of Interface so this needs to be in here
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
-
+        // Out of scope for this assignment, but it's part of Interface so this needs to be in here
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
+        // Out of scope for this assignment, but it's part of Interface so this needs to be in here
     }
 
     public void onStart(ITestContext iTestContext) {
-
+        // Out of scope for this assignment, but it's part of Interface so this needs to be in here
     }
 
     public void onFinish(ITestContext iTestContext) {
-
+        // Out of scope for this assignment, but it's part of Interface so this needs to be in here
     }
 }

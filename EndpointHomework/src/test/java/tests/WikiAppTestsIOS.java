@@ -4,21 +4,22 @@ import org.openqa.selenium.ScreenOrientation;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import screens.WikiScreen;
 import screens.articles.ArticleDetailScreen;
 import screens.articles.ArticleScreen;
-import screens.WikiScreen;
 import screens.mylists.MyListsScreen;
 import screens.mylists.SavedListScreen;
 import screens.readinglists.ReadingListScreen;
+import screens.search.SearchWikipediaScreen;
 import wikiwiki.WikiCore;
+
 import java.lang.reflect.Method;
-import java.util.List;
 
 
 /**
  * Test cases based on the homework requirements
  */
-public class WikiAppTests extends WikiCore {
+public class WikiAppTestsIOS extends WikiCore {
     /*
         List the screen objects that we need in Wiki Home Screen Tests
      */
@@ -28,15 +29,15 @@ public class WikiAppTests extends WikiCore {
     ReadingListScreen readingListScreen;
     MyListsScreen myListScreen;
     SavedListScreen savedListScreen;
-    String platform;
+    SearchWikipediaScreen searchWikiScreen;
 
     /*
         Create wiki screen object before each method
      */
     @BeforeMethod
     public void beforeMethod(Method method) {
-        platform = driver.getPlatformName();
         wikiScreen = new WikiScreen();
+        savedListScreen = new SavedListScreen();
         // This is just for testing purpose. In the real environment, we usually don't put anything in the console log.
         // We usually look at the test result report for information that we need.
         System.out.println("\n" + "::::::: Starting test: " + method.getName() + " :::::::" + "\n");
@@ -50,29 +51,25 @@ public class WikiAppTests extends WikiCore {
      */
     @Test
     public void t1_saveTwoArticlesIntoOneList() {
-        articleScreen = wikiScreen.touchNews(0);
-        articleDetailScreen = articleScreen.touchArticle(0);
-        readingListScreen = articleDetailScreen.touchBookmarkIcon();
-        readingListScreen.touchSavedText();
-        articleDetailScreen.goBackToArticleScreen();
-        articleScreen.touchArticle(1);
+        searchWikiScreen = wikiScreen.touchSearchWikipediaEditBox();
+        // Basic version: Hard code the Search word. We should have a XML file to managed all our Strings.
+        searchWikiScreen.searchFor("Appium");
+        articleDetailScreen = searchWikiScreen.touchSearchResult(0);
         articleDetailScreen.touchBookmarkIcon();
-        readingListScreen.touchSavedText();
-        articleDetailScreen.goBackToArticleScreen();
-        articleScreen.goBackToWikiHomeScreen();
-        myListScreen = wikiScreen.touchMyLists();
-        savedListScreen = myListScreen.touchSavedList();
-        savedListScreen.deleteTheList(0);
+        goBack();
+        wikiScreen.touchSearchWikipediaEditBox();
+        articleDetailScreen = searchWikiScreen.touchSearchResult(1);
+        articleDetailScreen.touchBookmarkIcon();
+        goBack();
+        wikiScreen.touchMyLists();
+        int previousSaveListSize = savedListScreen.getArticlesSize();
+        savedListScreen.iOsDeleteTheList(0);
+        int currentSaveListSize = savedListScreen.getArticlesSize();
 
-        // Verify the lower bound and upper bound articles.
-        // We deleted 1 article, and total article is 1
-        // lower/upper bound value should be 1 of 1
-        List<Integer> availalbeArticles = savedListScreen.getAvailableArticlesCount();
-        int lowerBoundArticleNumber = availalbeArticles.get(0);
-        int higherBoundArticleNumber = availalbeArticles.get(1);
-
-        Assert.assertEquals(lowerBoundArticleNumber, 1);
-        Assert.assertEquals(higherBoundArticleNumber, 1);
+        // Verify that the previous article size should be 2
+        Assert.assertEquals(previousSaveListSize, 2);
+        // Verify that the current article size should be 1
+        Assert.assertEquals(currentSaveListSize, 1);
     }
 
     /**
@@ -81,11 +78,15 @@ public class WikiAppTests extends WikiCore {
     @Test
     public void t2_articleInTheListMatchTheActualArticle() {
         // Save the current article title in MyList. Get the actual article title, and then compare both.
-        String savedArticleTitle = savedListScreen.getSaveArticleTitle(0);
-        savedListScreen.touchTargetArticle(0);
-        String articleTitle = articleDetailScreen.getArticleTitle();
+        wikiScreen.touchMyLists();
+        String savedArticleTitle = savedListScreen.getIosSaveArticleTitle(0);
+        // Due to iOS app layout format, I had to parse the string in order to get article title. Downside about open source app.
+        String trimTheTitleBasedOnWikiFormat = savedArticleTitle.split(" ")[0].replaceAll("\\s+", "-").split("-")[0];
+        articleDetailScreen = savedListScreen.touchIosTargetArticle(0);
+        String articleTitle = articleDetailScreen.getIosArticleTitle();
 
-        Assert.assertEquals(articleTitle, savedArticleTitle);
+        // Verify that the article title is match
+        Assert.assertEquals(articleTitle, trimTheTitleBasedOnWikiFormat);
     }
 
     /**
